@@ -1,1 +1,2 @@
-Test GitHub project
+Test GitHub project \n
+Commit #1
