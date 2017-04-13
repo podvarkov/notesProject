@@ -36,11 +36,10 @@ public class AddNoteActivity extends AppCompatActivity {
         note.setNoteID(id);
         if (id==null) {
             MemCacheDataStorage.getInstance().addNote(note);
-            finish();
         } else {
             MemCacheDataStorage.getInstance().editNote(note);
-            finish();
         }
+        finish();
     }
 }
 
