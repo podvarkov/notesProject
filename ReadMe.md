@@ -1,2 +1,1 @@
-Test GitHub project \n
-Commit #1
+Simple Android Notepad
