@@ -1,4 +1,2 @@
-
-
-Simple Android Notepad
+Ыimple Android Notepad
 
