@@ -1,2 +1,2 @@
-asdSimple Android Notepad
+Simple Android Notepad
 
