@@ -1,0 +1,2 @@
+﻿Simple Android Notepad
+
