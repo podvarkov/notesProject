@@ -72,7 +72,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final Note n=mDataset.get(position);
-        holder.noteTitle.setText(n.getNoteTitle()+n.getNoteId());
+        holder.noteTitle.setText(n.getNoteTitle());
         if (n.getNoteMainText().length()>=150) {
             holder.noteMainT.setText(n.getNoteMainText().substring(0,149)+"\n...");
         } else holder.noteMainT.setText(n.getNoteMainText()+"\n...");
