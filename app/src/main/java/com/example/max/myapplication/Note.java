@@ -1,5 +1,6 @@
 package com.example.max.myapplication;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.util.Log;
 
@@ -13,15 +14,20 @@ public class Note {
     private String noteMainText;
     private Date noteCreatedDate;
     private Integer noteId;
+    private Boolean notificationTime;
     Note(String noteTitle,String noteMainText) {
         this.noteMainText=noteMainText;
         this.noteTitle=noteTitle;
         this.noteCreatedDate=new Date();
         this.noteId=null;
-
-
+        this.notificationTime=false;
     }
-
+    public void setSetNotificationTime(boolean flag) {
+        notificationTime=flag;
+    }
+    public Boolean isSetNotificationTime() {
+        return notificationTime;
+    }
     public String getNoteTitle() {
         return noteTitle;
     }

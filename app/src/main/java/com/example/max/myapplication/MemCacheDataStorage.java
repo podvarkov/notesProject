@@ -1,5 +1,6 @@
 package com.example.max.myapplication;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.util.Log;
 
@@ -28,6 +29,8 @@ public class MemCacheDataStorage implements DataStorage{
     private MemCacheDataStorage() {
 
     }
+
+
 
     @Override
     public void addNote(Note note) {

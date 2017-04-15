@@ -1,5 +1,6 @@
 package com.example.max.myapplication;
 
+import android.app.PendingIntent;
 import android.content.Context;
 
 import java.util.ArrayList;

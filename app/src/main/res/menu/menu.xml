@@ -10,4 +10,8 @@
         android:icon="@android:drawable/ic_menu_edit"
         android:title=""
         notepad:showAsAction="ifRoom"/>
+    <item android:id="@+id/action_notify"
+        android:icon="@android:drawable/ic_input_get"
+        android:title=""
+        notepad:showAsAction="ifRoom"/>
 </menu>

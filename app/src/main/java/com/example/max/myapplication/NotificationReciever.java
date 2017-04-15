@@ -17,8 +17,10 @@ public class NotificationReciever extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Notification noti=(Notification)intent.getParcelableExtra("NOTI");
         Log.d("Log","Time Recieved "+new Date().toString());
-
+        int notifyId=intent.getIntExtra("ID",0);
+        Log.d("Log","ID "+notifyId);
         NotificationManager notificationManager=(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(1,noti);
+        notificationManager.notify(notifyId,noti);
+        MemCacheDataStorage.getInstance().getNote(notifyId).setSetNotificationTime(false);
     }
 }
