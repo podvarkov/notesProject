@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,11 +28,14 @@ public class ShowNoteActivity extends AppCompatActivity implements DeleteDialog.
     TextView maintext;
     TextView date;
     Integer position;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_note);
+        toolbar=(Toolbar)findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         title = (TextView) findViewById(R.id.show_note_title);
         maintext = (TextView) findViewById(R.id.show_note_maintext);
@@ -41,15 +45,19 @@ public class ShowNoteActivity extends AppCompatActivity implements DeleteDialog.
 
     }
 
+
     @Override
     public void onSetTimeClick(Date date) {
         Log.d("Log", "" + date.getTime());
         setNotification(date);
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
+        //onPrepareOptionsMenu(toolbar.getMenu());
         if (position != null) {
             Note note = MemCacheDataStorage.getInstance().getNote(position);
             title.setText(note.getNoteTitle());
@@ -62,7 +70,9 @@ public class ShowNoteActivity extends AppCompatActivity implements DeleteDialog.
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (MemCacheDataStorage.getInstance().getNote(position).isSetNotificationTime()) {
-            menu.getItem(2).setIcon(R.drawable.add_note);
+            menu.getItem(2).setIcon(R.mipmap.ic_notifications_off_black_24dp);
+        } else {
+            menu.getItem(2).setIcon(R.mipmap.ic_notifications_none_black_24dp);
         }
         return super.onPrepareOptionsMenu(menu);
     }
@@ -71,7 +81,6 @@ public class ShowNoteActivity extends AppCompatActivity implements DeleteDialog.
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
-
     }
 
     @Override
@@ -88,8 +97,18 @@ public class ShowNoteActivity extends AppCompatActivity implements DeleteDialog.
                 startActivity(edit);
                 break;
             case R.id.action_notify:
-                d = new DateTimeDialog();
-                d.show(getFragmentManager(), "date");
+                if (MemCacheDataStorage.getInstance().getNote(position).isSetNotificationTime()){
+                    AlarmManager alarmManager=(AlarmManager)getSystemService(ALARM_SERVICE);
+                    Intent alarmIntent = new Intent(this, NotificationReciever.class);
+                    PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(this,position,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+                    alarmManager.cancel(alarmPendingIntent);
+                    MemCacheDataStorage.getInstance().getNote(position).setSetNotificationTime(false);
+                    onPrepareOptionsMenu(toolbar.getMenu());
+                    Toast.makeText(this, "Canceled Notification", Toast.LENGTH_SHORT).show();
+                } else {
+                    d = new DateTimeDialog();
+                    d.show(getFragmentManager(), "date");
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -106,11 +125,7 @@ public class ShowNoteActivity extends AppCompatActivity implements DeleteDialog.
     @Override
     public void onCancelClick() {
         Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
-        AlarmManager alarmManager=(AlarmManager)getSystemService(ALARM_SERVICE);
-        Intent alarmIntent = new Intent(this, NotificationReciever.class);
-        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(this,position,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.cancel(alarmPendingIntent);
-        MemCacheDataStorage.getInstance().getNote(position).setSetNotificationTime(false);
+
 
     }
 
@@ -134,10 +149,9 @@ public class ShowNoteActivity extends AppCompatActivity implements DeleteDialog.
         alarmIntent.putExtra("NOTI",noti);
         alarmIntent.putExtra("ID",position);
         PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(this,position,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-        //alarmMgr.set(AlarmManager.RTC_WAKEUP,d.getTime(),alarmPendingIntent);
-        alarmMgr.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis()+1000*10,alarmPendingIntent);
+        alarmMgr.set(AlarmManager.RTC_WAKEUP,d.getTime(),alarmPendingIntent);
         MemCacheDataStorage.getInstance().getNote(position).setSetNotificationTime(true);
-
-
+        Toast.makeText(this,"Notification set on "+d,Toast.LENGTH_LONG).show();
+        onPrepareOptionsMenu(toolbar.getMenu());
     }
 }

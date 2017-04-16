@@ -52,7 +52,8 @@ public class DateTimeDialog extends DialogFragment {
         });
 
         builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Set Notification")
+
+        builder.setCustomTitle(inflater.inflate(R.layout.set_notif,null))
                 .setView(v)
                 .setIcon(R.drawable.note);
 

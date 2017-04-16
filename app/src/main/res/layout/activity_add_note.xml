@@ -1,47 +1,31 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1"
-    android:padding="20dp"
-    android:baselineAligned="false"
-    android:clickable="false"
-    android:backgroundTint="@color/abc_primary_text_material_light">
+    android:fitsSystemWindows="true"
+    tools:context="com.example.max.myapplication.MainActivity">
 
+<android.support.design.widget.AppBarLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/AppTheme.AppBarOverlay"
+    android:background="#d28a17"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/android">
 
-    <EditText android:id="@+id/ed_note_title"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Title"
-        android:inputType="text"
-        android:maxLines="1"
-        android:text="Заметка № " />
-
-    <EditText
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text|textMultiLine"
-        android:id="@+id/ed_noteMainText"
-        android:hint="Type Your note"
-        android:nestedScrollingEnabled="true"
-        android:maxLines="15"
-        android:gravity="start"
-        android:layout_weight="0.99"
-        android:textColorHighlight="@color/accent_material_light"
-        android:text="При создании кнопки в XML, я обнаружил некоторые трудности позиционирования View у нашей кнопки над остальными View (в частности, над Navigation Drawer). Я решил реализовать кнопку программно и работать посредством Builder-паттерна, что позволит размещать FAB выше других View в Activity при вызове .create(). " />
+        android:layout_height="?attr/actionBarSize"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        android:background="#d28a17"
+        />
+    </android.support.design.widget.AppBarLayout>
+    <include layout="@layout/add_note_content">
 
+    </include>
 
-
-        <Button
-            android:layout_width="341dp"
-            android:layout_height="wrap_content"
-            android:text="Save Note"
-            android:id="@+id/btn_saveNote"
-            android:onClick="addNote"
-            android:textColor="@android:color/holo_blue_dark"
-            android:layout_weight="0.03" />
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
 
 
 

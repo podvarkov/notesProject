@@ -1,6 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:padding="20dp"
+    android:baselineAligned="false"
+    android:clickable="false"
+    tools:showIn="@layout/activity_add_note"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:backgroundTint="@color/abc_primary_text_material_light"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+
+    <EditText android:id="@+id/ed_note_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Title"
+        android:inputType="text"
+        android:maxLines="1"
+        android:text="Заметка № " />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text|textMultiLine"
+        android:id="@+id/ed_noteMainText"
+        android:hint="Type Your note"
+        android:nestedScrollingEnabled="true"
+        android:maxLines="15"
+        android:gravity="start"
+        android:layout_weight="0.99"
+        android:textColorHighlight="@color/accent_material_light"
+        android:text="При создании кнопки в XML, я обнаружил некоторые трудности позиционирования View у нашей кнопки над остальными View (в частности, над Navigation Drawer). Я решил реализовать кнопку программно и работать посредством Builder-паттерна, что позволит размещать FAB выше других View в Activity при вызове .create(). " />
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="Save Note"
+        android:id="@+id/btn_saveNote"
+        android:onClick="addNote"
+        android:textColor="#ffffff"
+        android:layout_weight="0.03"
+        android:layout_margin="0dp"
+        android:padding="0dp"
+        android:background="#d28a17"
+        android:textSize="17dp"
+        />
 </LinearLayout>
+

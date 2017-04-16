@@ -2,16 +2,16 @@
     xmlns:notepad="http://schemas.android.com/apk/res-auto">
     <!-- Search, should appear as action button -->
     <item android:id="@+id/action_remove"
-        android:icon="@android:drawable/ic_menu_close_clear_cancel"
+        android:icon="@mipmap/ic_delete_sweep_black_24dp"
         notepad:showAsAction="ifRoom"
         android:title="" />
     <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/action_edit"
-        android:icon="@android:drawable/ic_menu_edit"
+        android:icon="@mipmap/ic_create_black_24dp"
         android:title=""
         notepad:showAsAction="ifRoom"/>
     <item android:id="@+id/action_notify"
-        android:icon="@android:drawable/ic_input_get"
+        android:icon="@mipmap/ic_notifications_none_black_24dp"
         android:title=""
         notepad:showAsAction="ifRoom"/>
 </menu>

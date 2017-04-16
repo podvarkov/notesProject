@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import java.util.Date;
 
@@ -32,8 +34,9 @@ public class DeleteDialog extends DialogFragment{
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Delete")
-                .setIcon(R.drawable.note)
+        View v=getActivity().getLayoutInflater().inflate(R.layout.set_notif,null);
+        ((TextView)v.findViewById(R.id.textViewDialog)).setText("Delete Note");
+        builder.setCustomTitle(v)
                 .setMessage("Are You sure?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
