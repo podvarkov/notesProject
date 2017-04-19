@@ -14,19 +14,19 @@ public class Note {
     private String noteMainText;
     private Date noteCreatedDate;
     private Integer noteId;
-    private Boolean notificationTime;
+    private Boolean notification;
     Note(String noteTitle,String noteMainText) {
         this.noteMainText=noteMainText;
         this.noteTitle=noteTitle;
         this.noteCreatedDate=new Date();
         this.noteId=null;
-        this.notificationTime=false;
+        this.notification=false;
     }
-    public void setSetNotificationTime(boolean flag) {
-        notificationTime=flag;
+    public void setNotification(boolean flag) {
+        notification=flag;
     }
-    public Boolean isSetNotificationTime() {
-        return notificationTime;
+    public Boolean isNotified() {
+        return notification;
     }
     public String getNoteTitle() {
         return noteTitle;

@@ -22,6 +22,6 @@ public class NotificationReciever extends BroadcastReceiver {
         NotificationManager notificationManager=(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(notifyId,noti);
         MemCacheDataStorage.getInstance().readNotes(context);
-        MemCacheDataStorage.getInstance().getNote(notifyId).setSetNotificationTime(false);
+        MemCacheDataStorage.getInstance().getNote(notifyId).setNotification(false);
     }
 }

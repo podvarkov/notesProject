@@ -69,7 +69,7 @@ public class ShowNoteActivity extends AppCompatActivity implements DeleteDialog.
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if (MemCacheDataStorage.getInstance().getNote(position).isSetNotificationTime()) {
+        if (MemCacheDataStorage.getInstance().getNote(position).isNotified()) {
             menu.getItem(2).setIcon(R.mipmap.ic_notifications_off_black_24dp);
         } else {
             menu.getItem(2).setIcon(R.mipmap.ic_notifications_none_black_24dp);
@@ -97,12 +97,12 @@ public class ShowNoteActivity extends AppCompatActivity implements DeleteDialog.
                 startActivity(edit);
                 break;
             case R.id.action_notify:
-                if (MemCacheDataStorage.getInstance().getNote(position).isSetNotificationTime()){
+                if (MemCacheDataStorage.getInstance().getNote(position).isNotified()){
                     AlarmManager alarmManager=(AlarmManager)getSystemService(ALARM_SERVICE);
                     Intent alarmIntent = new Intent(this, NotificationReciever.class);
                     PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(this,position,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);
                     alarmManager.cancel(alarmPendingIntent);
-                    MemCacheDataStorage.getInstance().getNote(position).setSetNotificationTime(false);
+                    MemCacheDataStorage.getInstance().getNote(position).setNotification(false);
                     onPrepareOptionsMenu(toolbar.getMenu());
                     Toast.makeText(this, "Canceled Notification", Toast.LENGTH_SHORT).show();
                 } else {
@@ -150,7 +150,7 @@ public class ShowNoteActivity extends AppCompatActivity implements DeleteDialog.
         alarmIntent.putExtra("ID",position);
         PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(this,position,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.set(AlarmManager.RTC_WAKEUP,d.getTime(),alarmPendingIntent);
-        MemCacheDataStorage.getInstance().getNote(position).setSetNotificationTime(true);
+        MemCacheDataStorage.getInstance().getNote(position).setNotification(true);
         Toast.makeText(this,"Notification set on "+d,Toast.LENGTH_LONG).show();
         onPrepareOptionsMenu(toolbar.getMenu());
     }
